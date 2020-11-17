@@ -15,8 +15,8 @@ public void draw()
   for(int i = 0; i < starfield.length; i++){
     starfield[i].show();
   }
-  bob.move();
   bob.show();
+  bob.move();
 }
 public void keyPressed(){ //hyperspace
   if(key == ' '){
@@ -28,7 +28,7 @@ public void keyPressed(){ //hyperspace
   else if(key == 'a'){ //turn left 10 degrees
     bob.turn(-20);
   }
-  else if(key == 'w'){
+  else if(key == 'w'){ //accelerate
     bob.accelerate(0.3);
   }
 }
