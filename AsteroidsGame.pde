@@ -1,5 +1,6 @@
 Star[] starfield;
 Spaceship bob = new Spaceship();
+ArrayList <Asteroid> asterField = new ArrayList <Asteroid>();
 public void setup() 
 {
   size(400,400);
@@ -7,6 +8,9 @@ public void setup()
   starfield = new Star[100];
   for(int i = 0; i < starfield.length; i++){
     starfield[i] = new Star();
+  }
+  for(int j = 0; j < 21; j++){
+    asterField.add(new Asteroid());
   }
 }
 public void draw() 
@@ -17,6 +21,13 @@ public void draw()
   }
   bob.show();
   bob.move();
+  for(int h = 0; h < asterField.size(); h++){
+    asterField.get(h).show();
+    asterField.get(h).move();
+    if(dist(asterField.get(h).getX(),asterField.get(h).getY(),bob.getX(),bob.getY()) < 20){
+      asterField.remove(h);
+    }
+  }
 }
 public void keyPressed(){ //hyperspace
   if(key == ' '){
