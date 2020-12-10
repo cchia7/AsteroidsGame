@@ -1,6 +1,8 @@
 Star[] starfield;
 Spaceship bob = new Spaceship();
 ArrayList <Asteroid> asterField = new ArrayList <Asteroid>();
+ArrayList <Bullet> ammo = new ArrayList <Bullet>();
+int checker = 0;
 public void setup() 
 {
   size(400,400);
@@ -28,7 +30,25 @@ public void draw()
       asterField.remove(h);
     }
   }
+  for(int m = 0; m < ammo.size(); m++){
+    ammo.get(m).show();
+    ammo.get(m).move();
+    for(int k = 0; k < asterField.size(); k++){
+    for(int l = 0; l < ammo.size(); l++){
+    if(dist(asterField.get(k).getX(),asterField.get(k).getY(),ammo.get(l).getX(),ammo.get(l).getY()) < 10){
+      asterField.remove(k);
+      ammo.remove(l);
+      break;
+    }
+    }
+  }
+  }
 }
+
+public void mousePressed(){
+  ammo.add(new Bullet(bob));
+}
+
 public void keyPressed(){ //hyperspace
   if(key == ' '){
     bob.hyperspace();
@@ -42,4 +62,15 @@ public void keyPressed(){ //hyperspace
   else if(key == 'w'){ //accelerate
     bob.accelerate(0.3);
   }
+  else if(key == 'r'){ //reset the game
+  
+  for(int n = 0; n < asterField.size(); n++){
+    asterField.remove(n);
+  }
+  
+  for(int o = 0; o < 21; o++){
+    asterField.add(new Asteroid());
+  }
+  bob.reset();
+}
 }
